@@ -414,7 +414,7 @@ Aula 5
 </body>
 
 </html>
-COPIAR CÓDIGO
+
 4) Colocamos no início dos arquivos index.html e imagem.html um código Python que indica a importação do código em base.html, bem como, o início e o final do bloco de conteúdo de cada uma;
 
 {% extends 'galeria/base.html' %}
@@ -424,7 +424,7 @@ COPIAR CÓDIGO
 ....
 
 {% endblock %}
-COPIAR CÓDIGO
+
 5) Melhoramos ainda mais a prática do DRY! Criamos um novo diretório dentro de templates/galeria chamado partials;
 
 6) Dentro desse novo diretório partials, criamos um novo arquivo chamado _footer.html;
@@ -442,7 +442,7 @@ COPIAR CÓDIGO
         </a>
     </div>
     <p class="rodape__texto">Desenvolvido por Alura</p>
-</footer>COPIAR CÓDIGO
+</footer>
 8) Excluímos o código correspondente ao footer em imagem.html e index.html;
 
 9) Adicionamos em `base.html um novo "bloco de código";
@@ -467,7 +467,7 @@ COPIAR CÓDIGO
     {% include 'galeria/partials/_footer.html' %}
 </body>
 
-</html>COPIAR CÓDIGO
+</html>
 Então temos um código mais atualizado em boas práticas de desenvolvimento. Porém, ainda podemos aplicar ainda mais a prática DRY.
 
 Agora é com você! Ao decorrer da aula, foi mencionado um trecho de código em index.html e imagem.html que pode ser otimizado criando uma partial.
