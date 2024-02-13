@@ -1,0 +1,138 @@
+
+instalacao do pip mac
+
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+
+python3 get-pip.py
+
+Linux
+
+sudo apt install python3-pip
+
+
+instalar o virtualenv
+
+pip install virtualenv
+
+-----
+entrei na pasta do projeto
+
+cd ~/Meu Drive/Cursos/Django/Django-templates-boas-praticas
+cria o nosso ambiente de trabalho
+
+virtualenv venv 
+source venv/bin/activate
+
+para desativar - deactivate
+
+instalando o Django
+pip3 install django
+
+
+atualizando o pip
+
+pip install --upgrade pip
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - 
+
+venv: É o ambiente virtual “padrão” do Python e sua grande vantagem é já vir instalado como um módulo na linguagem a partir da versão 3.3. Se trata de um subset (parte menor) da ferramenta virtualenv.
+Virtualenv: É uma ferramenta feita especificamente para a criação de ambientes virtuais e precede a criação da venv, sendo um superset (parte maior) dela. Algumas de sua principais vantagens sobre a venv são:
+Maior velocidade, graças ao método app-data seed;
+Pode criar ambientes virtuais para versões arbitrárias do Python instaladas na máquina;
+Pode ser atualizado utilizando a ferramenta pip;
+Possui uma Programmatic API, capaz de descrever um ambiente virtual sem criá-lo.
+Conda: É uma alternativa não apenas às ferramentas de ambiente virtuais já citadas, mas ao instalador de pacotes pip também. Possui um escopo mais centrado na área de ciência de dados e possui a capacidade de instalar pacotes fora do ecossistema do Python.
+Virtualenvwrapper: É uma extensão do projeto Virtualenv que torna a criação, deleção e gerenciamento geral dos ambientes virtuais mais fácil. Uma grande vantagem de sua utilização é a organização de todos os ambientes virtuais utilizados em um só lugar, além de facilitar os comandos de CLI.
+Poetry: É uma ferramenta para gerenciamento de dependências e pacotes do Python. Através do Poetry é possível declarar quais pacotes um projeto necessita para funcionar, de forma parecida ao requirements.txt, porém, de forma determinística.
+
+vamos criar um projeot django
+
+django-admin startproject setup .
+
+
+rode o servidor pela primeira vez
+
+
+python3 manage.py runserver
+- - - - - - - - - - - - - - - - - - - - - - - - - 
+
+alterando o timezome e a lingua principal, vamos entrar em ./setup/settings.py 
+
+vamos descer e encontar o timezome e UTC 
+
+---
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+---
+
+vamos alterar para 
+ ---
+LANGUAGE_CODE = 'pt-br'
+
+TIME_ZONE = 'America/Sao_Paulo'
+ ---
+
+- - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Variaveis de ambiente no Django 
+
+para importar o nosso sistema para o git nao podemos enviar a nossa chave SECRET_KEY por motivos de seguranca
+vamos colocar essa chave dentro de uma variavel de ambiente, para isso vamos instalar o pacote de Variaveis
+
+
+pip3 install python-dotenv
+
+pip3 freeze > requirements.txt 
+
+vamos pegar nossa key dentro do ./setup/settings 
+no nosso caso é o :
+SECRET_KEY = 'django-insecure-$1t9w%++7%tntr2qkd(eig_99in6e*#lc5+%yrfgmlrdx9as(c'
+
+dentro do arquivo que criamos o .env vamos criar a nossa variavel mas sem as aspas 
+
+SECRET_KEY = django-insecure-$1t9w%++7%tntr2qkd(eig_99in6e*#lc5+%yrfgmlrdx9as(c
+
+
+dentro do ./setup/settings.py vamos importa o os e o vemv
+from pathlib import Path, os
+from dotenv import load_dotenv
+load_dotenv()
+
+e vamos colocar a nossa variavel de ambiente
+
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
+
+---
+as linhas que alteramos foram: 
+
+from pathlib import Path, os
+from dotenv import load_dotenv
+load_dotenv()
+
+SECRET_KEY = str(os.getenv('SECRET_KEY'))
+---
+
+vamos upar nosso projeto para o git, mas antes vamos criar o nosso gitignore
+
+no site: https://www.toptal.com/developers/gitignore/
+
+tem uma lista de arquivos que nao devemos upar para o github
+
+vamos procurar no que estamos codando e vamos copiar e colar no nosso projetp
+
+no nosso casso foi o Django
+
+e vamos startar o nosso git
+
+git init
+
+git add .
+
+git commit -m "projeto space"
+
+e vamos no nosso git e pegaremos o end
+
+git remote add github git@github.com:SrPortugal/space.git # eu mudo o origin para github
+
