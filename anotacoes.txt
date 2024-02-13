@@ -136,3 +136,128 @@ e vamos no nosso git e pegaremos o end
 
 git remote add github git@github.com:SrPortugal/space.git # eu mudo o origin para github
 
+- - - - - - - - - - - - - - - - - - - - - - - - - 
+
+
+Aula 3 
+
+os comandos do manager.py disponivel 
+
+python manage.py help 
+
+tem um comando startapp que sao pedacinhos do nosso projeto que compoem o django 
+
+vamos criar o nosso primeiro app e chamar ele de galeria
+
+python3 manage.py startapp galeria
+
+agora vamos falar para o Djando que o novo app que instalamos participa do projeto
+
+dentro do ./setup/settings.py vamos procurar o INSTALLED_APPS  e add o nosso novo app 
+
+e ficou assim: 
+
+--
+INSTALLED_APPS = [
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+    'galeria',
+]
+---
+
+dentro de ./galeria/views.py vamos ajustar o nosso html para aparecer algo na nossa pq
+vamos configurar e importar o django.http 
+e ficou assim: 
+
+---
+from django.shortcuts import render
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse('<h1>Space</h1>')
+---
+
+
+e vamos ajustar a nossa rota no arquivo ./setup/urls.py 
+
+dentro do urls.py 
+---
+from django.contrib import admin
+from django.urls import path
+from galeria.views import index
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', index),
+]
+--- 
+
+- - - - - - - - - - - - - - - - - - - - - - - - - 
+Isolando as URLS, cada app vai controlar as suas rotas
+
+
+para nao ter varias rotas dentro do setup principal vamos faz jump para q cada app controle a sua propria rota
+
+de dentro do ./setup/urls.py vamos retirar o que importamos
+ e add um include
+o cod vai ficar assim:
+
+---
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('galeria.urls')),
+]
+---
+
+e dentro do nosso app ./galeria/urls.py vamos ajustar o arquivo
+
+---
+from django.urls import path
+from galeria.views import index
+
+urlpatterns = [
+    path('', index),
+]
+---
+
+e start o projeto
+
+python3 manage.py runserver 
+
+
+#### Templates #######
+
+vamos falar para o Django onde vai ficar todo os templates que iremos utilizar na nossa estrutura
+
+no arquivo ./setup/settings.py vamos procurar por TEMPLATES 
+e vamos ajustar o redirecionamento
+
+antes o codigo estava assim:
+
+'DIRS': [],
+
+e vamos alterar para:
+
+'DIRS': [os.path.join(BASE_DIR, 'templates')],
+
+vamos criar a pasta template e add um index.html dentro dele
+
+e vamos ajustar o nosso render no ./galeria/views.py 
+vou reitar o index, pq nao iremos usar mais 
+
+e o views.py ficará assim:
+
+--- 
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'index.html')
+---
+
