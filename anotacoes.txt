@@ -261,3 +261,26 @@ def index(request):
     return render(request, 'index.html')
 ---
 
+
+
+- - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+Aula 4
+
+baixa o arquivo do git 
+https://github.com/alura-cursos/alura_space/tree/projeto_front
+
+para deixar o nosso codigo um pouco mais organizado, dentro do templates vamos criar uma pasta referente ao nosso app 
+colocar o nosso index dentro da pasta que criamo. vamos abrir o index do projeto que baixarmos, copiar todos o conteudo e colocar dentro do nosso index na pasta ./templates/galeria/
+
+com essa mudanca a nossa pagina vai dar erro temos ajustar o nosso viwes 
+o cod vai ficar assim:
+
+---
+from django.shortcuts import render
+
+def index(request):
+    return render(request, 'galeria/index.html')
+---
+
+agora temos que ajustar o style
